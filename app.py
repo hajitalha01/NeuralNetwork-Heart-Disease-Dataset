@@ -3,15 +3,28 @@ import pandas as pd
 import numpy as np
 import pickle
 
-# Load model
-with open("model.pkl", "rb") as file:
-    model = pickle.load(file)
-
 st.title("❤️ Heart Disease Prediction App")
 
+# -------------------------------
+# Model Path Input Section
+# -------------------------------
+st.subheader("📁 Upload or provide model .pkl file path")
+model_path = st.text_input("https://raw.githubusercontent.com/YourName/NeuralNetwork-Heart-Disease-Dataset/main/model.pkl
+", "model.pkl")
+
+# Try model load
+try:
+    with open(model_path, "rb") as file:
+        model = pickle.load(file)
+    st.success(f"Model loaded successfully from: {model_path}")
+except:
+    st.error("❗ Could not load model — invalid path or file not found")
+
+# -------------------------------
+# Patient Input Section
+# -------------------------------
 st.write("Enter patient data below:")
 
-# Input fields
 age = st.number_input("Age", min_value=1, max_value=120, value=40)
 sex = st.selectbox("Sex (1=Male, 0=Female)", [1, 0])
 cp = st.selectbox("Chest Pain Type (0-3)", [0,1,2,3])
@@ -26,7 +39,6 @@ slope = st.selectbox("Slope (0-2)", [0,1,2])
 ca = st.selectbox("Number of vessels (0-3)", [0,1,2,3])
 thal = st.selectbox("Thal (1=normal,2=fixed defect,3=reversible defect)", [1,2,3])
 
-# Convert input into dataframe
 data = pd.DataFrame({
     'age':[age],
     'sex':[sex],
@@ -46,7 +58,6 @@ data = pd.DataFrame({
 st.write("### Model Input Data:")
 st.write(data)
 
-# Prediction
 if st.button("🔍 Predict"):
     result = model.predict(data)[0]
     
@@ -54,4 +65,3 @@ if st.button("🔍 Predict"):
         st.error("⚠️ High possibility of Heart Disease!")
     else:
         st.success("👍 Heart condition looks Normal.")
-

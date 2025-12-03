@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -8,9 +9,8 @@ st.title("❤️ Heart Disease Prediction App")
 # -------------------------------
 # Model Path Input Section
 # -------------------------------
-st.subheader("📁 Upload or provide model .pkl file path")
-model_path = st.text_input("https://raw.githubusercontent.com/YourName/NeuralNetwork-Heart-Disease-Dataset/main/model.pkl
-", "model.pkl")
+st.subheader("hajitalha01/NeuralNetwork-Heart-Disease-Dataset/model.pkl")
+model_path = st.text_input("hajitalha01/NeuralNetwork-Heart-Disease-Dataset/model.pkl", "model.pkl")
 
 # Try model load
 try:

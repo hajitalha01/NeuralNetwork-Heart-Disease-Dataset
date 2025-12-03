@@ -1,24 +1,27 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+import requests
+import io
 
 st.title("❤️ Heart Disease Prediction App")
 
 # -------------------------------
-# Model Path Input Section
+# Model Load Section
 # -------------------------------
-st.subheader("hajitalha01/NeuralNetwork-Heart-Disease-Dataset/model.pkl")
-model_path = st.text_input("NeuralNetwork-Heart-Disease-Dataset/model.pkl", "model.pkl")
+st.subheader("🔗 Loading model from GitHub RAW")
 
-# Try model load
+model_url = "https://raw.githubusercontent.com/hajitalha01/NeuralNetwork-Heart-Disease-Dataset/main/model.pkl"
+
 try:
-    with open(model_path, "rb") as file:
-        model = pickle.load(file)
-    st.success(f"Model loaded successfully from: {model_path}")
-except:
-    st.error("❗ Could not load model — invalid path or file not found")
+    response = requests.get(model_url)
+    model = pickle.load(io.BytesIO(response.content))
+    st.success("🎉 Model Loaded Successfully From GitHub!")
+
+except Exception as e:
+    st.error("❗ ERROR — Model Could Not Be Loaded!")
+    st.write(e)
 
 # -------------------------------
 # Patient Input Section

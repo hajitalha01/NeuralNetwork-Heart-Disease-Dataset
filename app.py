@@ -10,7 +10,7 @@ st.title("❤️ Heart Disease Prediction App")
 # Model Path Input Section
 # -------------------------------
 st.subheader("hajitalha01/NeuralNetwork-Heart-Disease-Dataset/model.pkl")
-model_path = st.text_input("hajitalha01/NeuralNetwork-Heart-Disease-Dataset/model.pkl", "model.pkl")
+model_path = st.text_input("NeuralNetwork-Heart-Disease-Dataset/model.pkl", "model.pkl")
 
 # Try model load
 try:
